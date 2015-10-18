@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 # Start Supervisor (autostart Redis)
 /usr/bin/supervisord -c /srv/supervisord.conf
