@@ -29,8 +29,7 @@ RUN apk --update add openssl-dev pcre-dev zlib-dev wget build-base && \
     echo -ne "- with `nginx -v 2>&1`\n" >> /root/.built
 
 # Forward request and error logs to docker log collector
-RUN mkdir -p /app/logs
-RUN mkdir -p /app/www
+RUN mkdir -p /app/logs/ && mkdir -p /app/www/
 RUN adduser -S www
 RUN chown www -R /app && chown www -R /etc/nginx
 
