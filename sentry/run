@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+# Start the main Sentry service
+/usr/local/bin/sentry --config=/sentry.conf.py start

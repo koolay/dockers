@@ -1,0 +1,31 @@
+mysql:
+    image: mysql
+    environment:
+     - MYSQL_ROOT_PASSWORD=123
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data:/data
+
+redis:
+    image: daocloud.io/koolay/alpine-redis
+    ports:
+      - "6379:6379"
+
+sentry:
+    image: koolay/sentry
+    links:
+     - redis
+     - mysql
+    volumes:
+     - ./sentry.conf.py:/sentry.conf.py
+
+    environment:
+     - SENTRY_URL_PREFIX=http://localhost:9876
+     - DB_HOST=mysql
+     - DB_USERNAME=root
+     - DB_PASSWORD=123
+     - DB_NAME=sentry
+     - DB_PORT=3306
+     - REDIS_HOST=redis
+     - REDIS_PORT=6379
