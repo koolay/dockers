@@ -1,11 +1,20 @@
+data:
+  image: busybox
+  volumes:
+   - /data/mysql
+   - /data/log
+   - /data/runtime
+   - /data
+
 mysql:
     image: mysql
     environment:
      - MYSQL_ROOT_PASSWORD=123
+     - MYSQL_DATABASE=sentry
     ports:
-      - "5432:5432"
-    volumes:
-      - ./data:/data
+      - "3306:3306"
+    volumes_from:
+      - data
 
 redis:
     image: daocloud.io/koolay/alpine-redis
@@ -14,6 +23,8 @@ redis:
 
 sentry:
     image: koolay/sentry
+    ports:
+      - "9876:9876"
     links:
      - redis
      - mysql
