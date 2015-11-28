@@ -34,9 +34,9 @@ RUN sed -Ei 's/^(bind-address|log)/#&/' /etc/mysql/my.cnf \
 	&& echo 'skip-host-cache\nskip-name-resolve' | awk '{ print } $1 == "[mysqld]" && c == 0 { c = 1; system("cat") }' /etc/mysql/my.cnf > /tmp/my.cnf \
 	&& mv /tmp/my.cnf /etc/mysql/my.cnf
 
-RUN mkdir           /etc/service/mysql
-ADD run.sh  /etc/service/mysql/run
-RUN chmod +x        /etc/service/mysql/run
+#RUN mkdir           /etc/service/mysql
+#ADD run.sh  /etc/service/mysql/run
+#RUN chmod +x        /etc/service/mysql/run
 
 VOLUME /var/lib/mysql
 
@@ -46,4 +46,4 @@ ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 3306
 
-CMD ["/sbin/my_init"]
+CMD ["mysqld"]

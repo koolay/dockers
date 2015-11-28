@@ -1,1 +1,1 @@
-exec mysqld --skip-grant-tables
+exec mysqld
