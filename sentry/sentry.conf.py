@@ -8,6 +8,7 @@ import os
 CONF_ROOT = os.path.dirname(__file__)
 REDIS_HOST = os.environ.get('REDIS_HOST')
 REDIS_PORT = os.environ.get('REDIS_PORT')
+REDIS_PORT = os.environ.get('REDIS_PORT')
 
 DATABASES = {
     'default': {
@@ -164,4 +165,4 @@ BITBUCKET_CONSUMER_KEY = ''
 BITBUCKET_CONSUMER_SECRET = ''
 
 # Django ALLOWED_HOSTS
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = '*'#os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',')
