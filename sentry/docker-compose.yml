@@ -32,6 +32,7 @@ sentry:
      - ./sentry.conf.py:/sentry.conf.py
 
     environment:
+     - SENTRY_DOCKER_DO_DB_CHECK=yes
      - SENTRY_URL_PREFIX=http://localhost:9876
      - DB_HOST=mysql
      - DB_USERNAME=root

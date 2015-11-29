@@ -2,6 +2,7 @@
 
 # check DB health if "SENTRY_DOCKER_DO_DB_CHECK" is set
 if [ -n "$SENTRY_DOCKER_DO_DB_CHECK" ]; then
+    echo 'check db alive ...'
     python /check_db_alive.py 10 3
     if [ "$?" != "0" ]; then
         echo "couldn't establish DB connection. exiting..."
