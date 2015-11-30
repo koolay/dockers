@@ -1,13 +1,13 @@
 # dockers
 memcached
 ---------
-### To run:
+- To run:
 
 ```
   docker run -d -p 11211:11211 <username>/memcached
 ```
 
-### To run with additional tuning values:
+- To run with additional tuning values:
 
 ```
  docker run -d -p 11211:11211 \
@@ -17,8 +17,8 @@ memcached
   <username>/memcached \
 ```
 
-### Test:
-
+- Test:
+```
 # telnet localhost 11211
 Trying 127.0.0.1...
 Connected to localhost.
@@ -30,5 +30,6 @@ STAT time 1387383960
 STAT version 1.4.15
 STAT libevent 2.0.21-stable
 <snip>
+```
 
 ---------------------------------
