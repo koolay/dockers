@@ -10,10 +10,8 @@ RUN wget http://xdebug.org/files/xdebug-2.3.3.tgz \
     && tar -zxvf xdebug-2.3.3.tgz && cd xdebug-2.3.3 \
     && phpize && ./configure --enable-xdebug && make && make install
 
-RUN adduser -S www-data
-#RUN addgroup -S www-data
-RUN mkdir /app
-RUN chown www-data /app
+
+RUN chown app:app /app
 ADD fpm.service /etc/service/php-fpm/run
 RUN chmod 775  -R /etc/service/php-fpm/
 
