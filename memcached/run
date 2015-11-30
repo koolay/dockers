@@ -1,14 +1,17 @@
 #!/bin/bash
 
-sasldblistusers2 /etc/sasldb2 | grep "admin"
+MEMCACHED_ARGS=
 
-if [ $? -ne 0 ]; then
-  PASSWORD=${PASSWORD:-`pwgen -s 20 1`}
-
-  echo ${PASSWORD} | saslpasswd2 -a memcached -c admin
-
-  echo "USERNAME=admin"
-  echo "PASSWORD=${PASSWORD}"
+if [ -n "$MEMCACHED_CACHE_SIZE" ]; then
+    MEMCACHED_ARGS+=" -m $MEMCACHED_CACHE_SIZE"
 fi
 
-exec memcached -S -u nobody -l 0.0.0.0 $@
+if [ -n "$MEMCACHED_CONNECTIONS" ]; then
+    MEMCACHED_ARGS+=" -c $MEMCACHED_CONNECTIONS"
+fi
+
+if [ -n "$MEMCACHED_THREADS" ]; then
+    MEMCACHED_ARGS+=" -t $MEMCACHED_THREADS"
+fi
+
+exec memcached -u daemon $MEMCACHED_ARGS
