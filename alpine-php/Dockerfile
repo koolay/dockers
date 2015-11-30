@@ -12,7 +12,8 @@ RUN wget http://xdebug.org/files/xdebug-2.3.3.tgz \
 
 RUN adduser -S www-data
 #RUN addgroup -S www-data
-
+RUN mkdir /app
+RUN chown www-data /app
 ADD fpm.service /etc/service/php-fpm/run
 RUN chmod 775  -R /etc/service/php-fpm/
 
@@ -20,7 +21,7 @@ ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
-
+VOLUME ["/app"]
 EXPOSE 9000
 CMD ["s6-svscan", "-t0", "/etc/service"]
 
