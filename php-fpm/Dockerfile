@@ -14,6 +14,7 @@ RUN wget http://xdebug.org/files/xdebug-2.3.3.tgz \
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /wheels/*
 RUN mkdir /app && chown www-data:www-data /app
+RUN mkdir -p /etc/service/fpm
 COPY fpm.service /etc/service/fpm/run
 RUN chmod +x /etc/service/fpm/run
 RUN chmod 775  -R /etc/service/php-fpm/
