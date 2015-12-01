@@ -1,3 +1,4 @@
 #!/bin/sh
-
-exec php-fpm -F;
+echo "start php5-fpm ..."
+service php5-fpm start
+service php5-fpm status

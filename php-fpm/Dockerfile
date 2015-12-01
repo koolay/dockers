@@ -18,10 +18,10 @@ RUN mkdir -p /etc/service/fpm
 COPY fpm.service /etc/service/fpm/run
 RUN chmod +x /etc/service/fpm/run
 
-ADD entrypoint.sh /entrypoint.sh
+ADD init.sh /etc/my_init.d/init.sh
+RUN chmod +x /etc/my_init.d/init.sh
 RUN chmod +x /entrypoint.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
 VOLUME ["/app"]
 EXPOSE 9000
 CMD ["/sbin/my_init"]
