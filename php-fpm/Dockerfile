@@ -14,7 +14,8 @@ RUN wget http://xdebug.org/files/xdebug-2.3.3.tgz \
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /wheels/*
 RUN mkdir /app && chown www-data:www-data /app
-ADD fpm.service /etc/service/php-fpm/run
+COPY fpm.service /etc/service/fpm/run
+RUN chmod +x /etc/service/fpm/run
 RUN chmod 775  -R /etc/service/php-fpm/
 
 ADD entrypoint.sh /entrypoint.sh
@@ -23,5 +24,5 @@ RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 VOLUME ["/app"]
 EXPOSE 9000
-CMD ["s6-svscan", "-t0", "/etc/service"]
+CMD ["/sbin/my_init"]
 
