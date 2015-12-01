@@ -17,7 +17,6 @@ RUN mkdir /app && chown www-data:www-data /app
 RUN mkdir -p /etc/service/fpm
 COPY fpm.service /etc/service/fpm/run
 RUN chmod +x /etc/service/fpm/run
-RUN chmod 775  -R /etc/service/php-fpm/
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
