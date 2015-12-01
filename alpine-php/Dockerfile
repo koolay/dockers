@@ -3,7 +3,7 @@ FROM koolay/alpine-base:3.2
 
 RUN apk --update --no-progress add build-base php-dev autoconf \
         php-fpm php-mcrypt php-curl php-gd php-json php-openssl \
-        php-pdo_mysql php-pdo_sqlite php-phar php-iconv php-ctype \
+        php-pdo_mysql php-pdo_sqlite php-phar php-iconv php-ctype php-memcached \
 	&& rm -rf /var/cache/apk/* \
 	&& curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN wget http://xdebug.org/files/xdebug-2.3.3.tgz \
