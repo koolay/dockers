@@ -2,7 +2,7 @@ FROM phusion/baseimage
 MAINTAINER koolay
 
 RUN apt-get update
-RUN apt-get install -y php5-fpm php5-cli php5-memcached \
+RUN apt-get install -y php5-dev php5-fpm php5-cli php5-memcached \
     php5-mysql php5-pgsql php5-sqlite php5-gd php5-json \
     php5-curl php5-intl php5-mcrypt php5-imagick php5-imap ca-certificates
 
