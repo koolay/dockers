@@ -6,6 +6,7 @@ RUN apk --update --no-progress add build-base php-dev autoconf \
         php-pdo_mysql php-pdo_sqlite php-phar php-iconv php-ctype \
 	&& rm -rf /var/cache/apk/* \
 	&& curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN apk add zlib && rm -rf /var/cache/apk/*
 RUN wget http://xdebug.org/files/xdebug-2.3.3.tgz \
     && tar -zxvf xdebug-2.3.3.tgz && cd xdebug-2.3.3 \
     && phpize && ./configure --enable-xdebug && make && make install
