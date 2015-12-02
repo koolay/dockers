@@ -17,7 +17,7 @@ RUN mkdir /app && chown www-data:www-data /app
 RUN mkdir -p /etc/service/fpm
 COPY run.sh /etc/service/fpm/run
 RUN chmod +x /etc/service/fpm/run
-
+RUN sed 's/;daemonize = yes/daemonize = no/' -i /etc/php5/fpm/php-fpm.conf
 ADD init.sh /etc/my_init.d/init.sh
 RUN chmod +x /etc/my_init.d/init.sh
 
