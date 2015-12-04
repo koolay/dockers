@@ -6,6 +6,8 @@ RUN apt-get install -y php5-dev php5-fpm php5-cli php5-memcached \
     php5-mysql php5-pgsql php5-sqlite php5-gd php5-json \
     php5-curl php5-intl php5-mcrypt php5-imagick php5-imap ca-certificates
 
+RUN php5enmod mcrypt && php5enmod memcached
+
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN apt-get install -y wget
 RUN wget http://xdebug.org/files/xdebug-2.3.3.tgz \
