@@ -1,5 +1,8 @@
 #!/bin/bash
 
+DOCKER_HOST_IP=$(netstat -nr | grep '^0\.0\.0\.0' | awk '{print $2}')
+echo "$DOCKER_HOST_IP dev.myapp.com" >> /etc/hosts
+
 # check DB health if "SENTRY_DOCKER_DO_DB_CHECK" is set
 if [ -n "$SENTRY_DOCKER_DO_DB_CHECK" ]; then
     echo 'check db alive ...'
@@ -27,3 +30,4 @@ if [ -n "$SENTRY_INITIAL_TEAM" ]; then
         fi
     fi
 fi
+
