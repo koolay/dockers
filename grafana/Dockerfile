@@ -1,5 +1,5 @@
-FROM tutum/nginx
-MAINTAINER Feng Honglin <hfeng@tutum.co>
+FROM phusion/baseimage
+MAINTAINER koolay
 
 ENV GRAFANA_VERSION 2.6.0
 
@@ -10,10 +10,9 @@ RUN apt-get update && \
     rm grafana.tar.gz && \
     rm -rf app && \
     mv grafana-${GRAFANA_VERSION} app && \
-    apt-get autoremove -y wget && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get autoremove -y wget
 
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 ADD config.js /app/config.js
 ADD default /etc/nginx/sites-enabled/default
 
