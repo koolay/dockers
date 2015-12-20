@@ -1,10 +1,7 @@
 grafana:
   image: daocoud.io/koolay/grafana
+  ports:
+   - "3000:3000"
   environment:
-    - HTTP_USER=admin
-    - HTTP_PASS=**ChangeMe**
-    - INFLUXDB_PROTO=http
-    - INFLUXDB_HOST=**ChangeMe**
-    - INFLUXDB_NAME=**ChangeMe**
-    - INFLUXDB_USER=root
-    - INFLUXDB_PASS=root
+   - GF_SERVER_ROOT_URL=http://dev.myapp.com
+   - GF_SECURITY_ADMIN_PASSWORD=dev
