@@ -1,5 +1,5 @@
 grafana:
-  image: daocoud.io/koolay/grafana
+  image: daocloud.io/koolay/grafana:latest
   ports:
    - "3000:3000"
   environment:
