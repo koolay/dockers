@@ -1,0 +1,3 @@
+filebeat:
+    image: daocloud.io/koolay/filebeat:latest
+
