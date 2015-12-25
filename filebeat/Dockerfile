@@ -14,7 +14,7 @@ RUN cd /tmp && tar xzvf filebeat.tar.gz \
 # clean
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-ADD filebeat.yml
+ADD filebeat.yml /
 RUN mkdir -p /etc/service/filebeat
 COPY run.sh /etc/service/filebeat/run
 RUN chmod +x /etc/service/filebeat/run
