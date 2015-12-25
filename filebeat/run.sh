@@ -1,1 +1,1 @@
-filebeat -c /filebeat.yml
+filebeat -e -c /filebeat.yml
