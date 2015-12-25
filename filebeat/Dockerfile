@@ -5,10 +5,10 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ENV FILEBEAT_VERSION=1.0.1
 
-RUN curl https://download.elastic.co/beats/filebeat/filebeat-${FILEBEAT_VERSION}-x86_64.tar.gz -O /tmp/filebeat.tar.gz \
-    && cd /tmp
+RUN cd /tmp && wget https://download.elastic.co/beats/filebeat/filebeat-${FILEBEAT_VERSION}-x86_64.tar.gz
 
-RUN tar xzvf filebeat.tar.gz \
+RUN echo "${FILEBEAT_SHA1} filebeat.tar.gz" | sha1sum -c - \
+    && tar xzvf filebeat-${FILEBEAT_VERSION}-x86_64.tar.gz \
     && cd filebeat-* && cp filebeat /usr/local/bin/ \
     && chmod +x /usr/local/bin/filebeat
 
