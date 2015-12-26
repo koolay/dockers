@@ -1,4 +1,4 @@
-FROM gliderlabs/alpine:3.2
+FROM koolay/alpine-base:3.2
 
 MAINTAINER koolay
 
