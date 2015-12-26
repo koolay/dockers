@@ -1,6 +1,6 @@
 FROM gliderlabs/alpine:3.2
 
-MAINTAINER josh@grahamis.com
+MAINTAINER koolay
 
 USER root
 
