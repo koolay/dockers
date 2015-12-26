@@ -18,5 +18,10 @@ ADD filebeat.yml /
 RUN mkdir -p /etc/service/filebeat
 COPY run.sh /etc/service/filebeat/run
 RUN chmod +x /etc/service/filebeat/run
+RUN mkdir -p /etc/ssl/private/ && mkdir -p /etc/ssl/certs/
+ADD logstash.crt /etc/ssl/certs/logstash.crt
+ADD logstash.key /etc/ssl/private/logstash.key
+
+VOLUMES["/etc/ssl"]
 
 CMD ["/sbin/my_init"]

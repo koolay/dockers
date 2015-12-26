@@ -147,8 +147,14 @@ output:
 
   ### Logstash as output
   logstash:
+    enabled: true
     # The Logstash hosts
-    hosts: ["dev.myapp.com:5000"]
+    hosts: ["dev.myapp.com:5403"]
+    tls:
+        certificate: /etc/ssl/certs/Logstash.crt
+        certificate_key: /etc/ssl/private/Logstash.key
+        certificate_authorities: /etc/ssl/certs/Logstash.crt
+        timeout: 15
 
     # Number of workers per Logstash host.
     #worker: 1
