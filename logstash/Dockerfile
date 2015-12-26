@@ -4,8 +4,8 @@ MAINTAINER koolay
 
 ENV LOGSTASH_PATH /opt/logstash
 ENV LOGSTASH_VERSION 2.1.1
-RUN cd /tmp && wget https://download.elastic.co/logstash/logstash/logstash-${LOGSTASH_VERSION}.tar.gz
-RUN tar -zxf logstash-${LOGSTASH_VERSION}.tar.gz && mv logstash-${LOGSTASH_VERSION} ${LOGSTASH_PATH}
+RUN curl -s -o /tmp/logstash-${LOGSTASH_VERSION}.tar.gz https://download.elastic.co/logstash/logstash/logstash-${LOGSTASH_VERSION}.tar.gz
+RUN cd /tmp && tar -zxvf logstash-${LOGSTASH_VERSION}.tar.gz && mv logstash-${LOGSTASH_VERSION} ${LOGSTASH_PATH}
 
 RUN mkdir -p /etc/ssl/private/ && mkdir -p /etc/ssl/certs/
 ADD logstash.crt /etc/ssl/certs/logstash.crt
