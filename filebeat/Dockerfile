@@ -21,5 +21,7 @@ RUN chmod +x /etc/service/filebeat/run
 RUN mkdir -p /etc/ssl
 ADD logstash.crt /etc/ssl/logstash.crt
 ADD logstash.key /etc/ssl/logstash.key
+ADD init.sh /etc/my_init.d/init.sh
+RUN chmod +x /etc/my_init.d/init.sh
 
 CMD ["/sbin/my_init"]

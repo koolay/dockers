@@ -1,1 +1,1 @@
-NGINX_ACCESS %{IPV4:client_ip} - %{NOTSPACE} \[%{HTTPDATE:time}\] %{QS:request} %{INT:status} %{INT:bytes} %{QS:referer} %{QS:user_agent}
+NGINX_ACCESS %{IPORHOST:clientip} %{USER:ident} %{USER:auth} \[%{HTTPDATE:timestamp}\]  "(?:%{WORD:verb} %{URIPATHPARAM:request}(?: HTTP/%{NUMBER:httpversion})?|-)" %{NUMBER:response} (?:%{NUMBER:bytes}|-) "(?:%{URI:referrer}|-)" %{QS:agent} %{NUMBER:request_time} %{NUMBER:upstream_response_time} %{NUMBER:gzip_ratio} (?:%{WORD:cache_hit}|-)%{GREEDYDATA}
