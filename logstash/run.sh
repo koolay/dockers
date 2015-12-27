@@ -2,7 +2,6 @@
 
 set -e
 
-echo "test logstash config .."
-exec $LOGSTASH_Path/bin/logstash -f first-pipeline.conf --configtest
+unset JAVA_OPTS
 echo "start logstash .."
-exec $LOGSTASH_Path/bin/logstash -f first-pipeline.conf
+exec $LOGSTASH_HOME/bin/logstash -f /etc/logstash

@@ -149,12 +149,21 @@ output:
   logstash:
     enabled: true
     # The Logstash hosts
-    hosts: ["dev.myapp.com:5403"]
+    hosts: ["dev.myapp.com:5043"]
     tls:
-        certificate: /etc/ssl/certs/Logstash.crt
-        certificate_key: /etc/ssl/private/Logstash.key
-        certificate_authorities: /etc/ssl/certs/Logstash.crt
-        timeout: 15
+          # The path to your SSL client certificate.
+          certificate: /etc/ssl/logstash.crt
+
+          # The path to your SSL client certificate key.
+          certificate_key: /etc/ssl/logstash.key
+
+          # The path to your trusted SSL CA file. This is used
+          # to authenticate your downstream server.
+          certificate_authorities:
+            - /etc/ssl/logstash.crt
+
+          # Network timeout in seconds.
+          timeout: 15
 
     # Number of workers per Logstash host.
     #worker: 1

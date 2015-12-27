@@ -1,0 +1,7 @@
+logstash:
+    image: koolay/logstash
+
+filebeat:
+    image: koolay/filebeat
+    links:
+     - "logstash"

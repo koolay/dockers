@@ -1,23 +1,24 @@
 FROM koolay/alpine-java:latest
 
 MAINTAINER koolay
-
-ENV LOGSTASH_PATH /opt/logstash
-RUN mkdir -p ${LOGSTASH_PATH}
+ENV LOGSTASH_HOME /opt/logstash
 RUN curl -s -o /tmp/logstash.tar.gz https://download.elastic.co/logstash/logstash/logstash-2.1.1.tar.gz
-RUN ls -al /tmp
-RUN cd /tmp && tar -zxf logstash.tar.gz && ls /tmp && mv logstash-2.1.1 ${LOGSTASH_PATH}
+RUN cd /tmp && tar -zxf logstash.tar.gz
+RUN mkdir /opt && mv /tmp/logstash-2.1.1 $LOGSTASH_HOME
+RUN chmod +x -R ${LOGSTASH_HOME}/bin/plugin
+RUN apk add --update bash
 
-RUN mkdir -p /etc/ssl/private/ && mkdir -p /etc/ssl/certs/
-ADD logstash.crt /etc/ssl/certs/logstash.crt
-ADD logstash.key /etc/ssl/private/logstash.key
+ENV JAVA_OPTS ""
+RUN ${LOGSTASH_HOME}/bin/plugin install logstash-input-beats
+RUN ${LOGSTASH_HOME}/bin/plugin update logstash-input-beats
+RUN ${LOGSTASH_HOME}/bin/plugin install logstash-output-influxdb
+
+ADD conf /etc/logstash
+ADD init.sh /opt/init
+RUN chmod +x /opt/init
 
 RUN mkdir -p /etc/service/logstash
 ADD run.sh /etc/service/logstash/run
-
-RUN adduser -S logstash
-RUN chown logstash -R /etc/ssl/private \
-    && chown logstash -R /etc/ssl/certs \
-    && chmod +x /etc/service/logstash/run
-
+RUN chmod +x /etc/service/logstash/run
+ENTRYPOINT ["/opt/init"]
 CMD ["s6-svscan", "-t0", "/etc/service"]
