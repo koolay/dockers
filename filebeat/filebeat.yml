@@ -31,14 +31,14 @@ filebeat:
 
 output:
   ### Console output
-  console:
-    pretty: true
+  #console:
+    #pretty: true
 
   ### Logstash as output
   logstash:
     enabled: true
     # The Logstash hosts
-    hosts: ["dev.myapp.com:5043"]
+    hosts: ["dev.myapp.com:5044"]
 
 ############################# Shipper #########################################
 
