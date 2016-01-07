@@ -25,19 +25,20 @@ filebeat:
       # in. Default: log
       #document_type: log
       document_type: nginx-error
+      scan_frequency: 1s
 ###############################################################################
 ############################# Libbeat Config ##################################
 ############################# Output ##########################################
 
 output:
   ### Console output
-  #console:
-    #pretty: true
+  console:
+    pretty: true
 
   ### Logstash as output
   logstash:
     enabled: true
-    # The Logstash hosts
+    ## The Logstash hosts
     hosts: ["dev.myapp.com:5044"]
 
 ############################# Shipper #########################################
