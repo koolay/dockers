@@ -12,6 +12,7 @@ ENV JAVA_OPTS ""
 ADD plugins ${LOGSTASH_HOME}/plugins
 RUN ${LOGSTASH_HOME}/bin/plugin install --no-verify ${LOGSTASH_HOME}/plugins/logstash-input-beats-2.0.3.gem
 RUN ${LOGSTASH_HOME}/bin/plugin install --no-verify ${LOGSTASH_HOME}/plugins/logstash-output-influxdb-2.0.2.gem
+RUN ${LOGSTASH_HOME}/bin/plugin install --no-verify ${LOGSTASH_HOME}/plugins/logstash-output-sentry-0.3.gem
 
 ADD conf /etc/logstash
 ADD init.sh /opt/init
