@@ -26,7 +26,7 @@ logstash:
 
 > output sentry 
 
-logstash plugin: (logstash-output-sentry)[https://github.com/javiermatos/logstash-output-sentry]
+logstash plugin: [logstash-output-sentry](https://github.com/javiermatos/logstash-output-sentry)
 
 ```
 output {
