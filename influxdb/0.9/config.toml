@@ -152,11 +152,13 @@ reporting-disabled = false
 ### Controls the listener for collectd data.
 ###
 [collectd]
-  enabled = false
-  # bind-address = ":25826"
-  # database = "collectd"
+  enabled = true
+  bind-address = ":25826"
+  retention-policy = "1d"
+  batch-size = 5000
+  database = "collectd"
   # retention-policy = ""
-  # typesdb = "/usr/share/collectd/types.db"
+  typesdb = "/usr/share/collectd/types.db"
 
   # These next lines control how batching works. You should have this enabled
   # otherwise you could get dropped metrics or poor performance. Batching
