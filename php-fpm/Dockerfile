@@ -15,6 +15,7 @@ RUN wget http://xdebug.org/files/xdebug-2.3.3.tgz \
     && phpize && ./configure --enable-xdebug && make && make install
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /wheels/*
+RUN usermod -u 1000 www-data
 RUN mkdir /app && chown www-data:www-data /app
 RUN mkdir -p /etc/service/fpm
 COPY run.sh /etc/service/fpm/run
