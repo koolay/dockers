@@ -1,7 +1,7 @@
 FROM phusion/baseimage
 MAINTAINER koolay
 
-ENV TELEGRAF_VERSION 0.2.4
+ENV TELEGRAF_VERSION 0.11.1-1
 RUN curl -s -o /tmp/telegraf_latest_amd64.deb http://get.influxdb.org/telegraf/telegraf_${TELEGRAF_VERSION}_amd64.deb && \
   dpkg -i /tmp/telegraf_latest_amd64.deb && \
   rm /tmp/telegraf_latest_amd64.deb
