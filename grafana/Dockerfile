@@ -1,7 +1,7 @@
 FROM phusion/baseimage
 MAINTAINER koolay
 
-ENV GRAFANA_VERSION 2.6.0
+ENV GRAFANA_VERSION 3.0.0
 
 RUN apt-get update && \
     apt-get -y install libfontconfig wget adduser openssl ca-certificates && \
