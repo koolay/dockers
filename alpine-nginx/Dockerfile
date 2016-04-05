@@ -8,9 +8,7 @@ FROM daocloud.io/koolay/alpine-base:latest
 ENV NGINX_VERSION=1.9.13 NGINX_HOME=/usr/share/nginx
 
 # Build Nginx from source and install consul template
-RUN \
-  apk --update --no-cache add build-base linux-headers openssl-dev pcre-dev wget zlib-dev \
-    ca-certificates openssl pcre zlib
+RUN apk --update --no-cache add build-base linux-headers openssl-dev pcre-dev wget zlib-dev ca-certificates openssl pcre zlib
 
 RUN \
   cd /tmp && \
