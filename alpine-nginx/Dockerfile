@@ -12,7 +12,6 @@ RUN apk --update add openssl-dev pcre-dev zlib-dev wget build-base && \
     curl -Ls http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz | tar -xz -C /tmp && \
     cd /tmp/nginx-${NGINX_VERSION} && \
     ./configure \
-        --with-http_stub_status_module \
         --with-http_ssl_module \
         --with-http_gzip_static_module \
         --prefix=${NGINX_HOME} \
@@ -20,6 +19,7 @@ RUN apk --update add openssl-dev pcre-dev zlib-dev wget build-base && \
         --http-log-path=/var/log/nginx/access.log \
         --error-log-path=/var/log/nginx/error.log \
         --pid-path=/var/run/nginx.pid \
+        --with-http_stub_status_module \
         --sbin-path=/usr/sbin/nginx && \
     make && \
     make install && \
