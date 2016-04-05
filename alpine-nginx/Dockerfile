@@ -2,7 +2,7 @@
 # Nginx image
 #
 
-FROM daocloud.io/koolay/alpine-base:latest
+FROM daocloud.io/koolay/alpine-base:master-a6c6227
 
 # Nginx and Consul template version
 ENV NGINX_VERSION=1.9.13 NGINX_HOME=/usr/share/nginx
