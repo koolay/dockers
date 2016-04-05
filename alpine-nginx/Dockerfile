@@ -5,12 +5,17 @@
 FROM koolay/alpine-base:3.2
 
 # Nginx and Consul template version
-ENV NGINX_VERSION=1.9.0 NGINX_HOME=/usr/share/nginx CONSUL_TEMPLATE_VERSION=0.9.0
+ENV NGINX_VERSION=1.9.10 NGINX_HOME=/usr/share/nginx
 
 # Build Nginx from source and install consul template
-RUN apk --update add openssl-dev pcre-dev zlib-dev wget build-base && \
-    curl -Ls http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz | tar -xz -C /tmp && \
-    cd /tmp/nginx-${NGINX_VERSION} && \
+RUN \
+  build_pkgs="build-base linux-headers openssl-dev pcre-dev wget zlib-dev" && \
+  runtime_pkgs="ca-certificates openssl pcre zlib" && \
+  apk --update add ${build_pkgs} ${runtime_pkgs} && \
+  cd /tmp && \
+  wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz && \
+  tar xzf nginx-${NGINX_VERSION}.tar.gz && \
+  cd /tmp/nginx-${NGINX_VERSION} && \
     ./configure \
         --with-http_ssl_module \
         --with-http_gzip_static_module \
@@ -21,13 +26,36 @@ RUN apk --update add openssl-dev pcre-dev zlib-dev wget build-base && \
         --pid-path=/var/run/nginx.pid \
         --with-http_stub_status_module \
         --sbin-path=/usr/sbin/nginx && \
+    --http-client-body-temp-path=/var/cache/nginx/client_temp \
+    --http-proxy-temp-path=/var/cache/nginx/proxy_temp \
+    --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp \
+    --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp \
+    --http-scgi-temp-path=/var/cache/nginx/scgi_temp \
+    --with-http_ssl_module \
+    --with-http_realip_module \
+    --with-http_addition_module \
+    --with-http_sub_module \
+    --with-http_dav_module \
+    --with-http_flv_module \
+    --with-http_mp4_module \
+    --with-http_gunzip_module \
+    --with-http_gzip_static_module \
+    --with-http_random_index_module \
+    --with-http_secure_link_module \
+    --with-http_stub_status_module \
+    --with-http_auth_request_module \
+    --with-mail \
+    --with-mail_ssl_module \
+    --with-file-aio \
+    --with-ipv6 \
+    --with-threads \
+    --with-stream \
+    --with-stream_ssl_module \
+    --with-http_v2_module && \
     make && \
     make install && \
-    apk del build-base && \
-    rm -rf /tmp/* && \
-    curl -Ls https://github.com/hashicorp/consul-template/releases/download/v${CONSUL_TEMPLATE_VERSION}/consul-template_${CONSUL_TEMPLATE_VERSION}_linux_amd64.tar.gz | tar -xz -C /usr/share && \
-    cp -f /usr/share/consul-template*/consul-template /usr/sbin/consul-template && rm -fr /usr/share/consul-template* && \
-    echo -ne "- with `nginx -v 2>&1`\n" >> /root/.built
+    apk del ${build_pkgs} && \
+    rm -rf /tmp/* 
 
 # Forward request and error logs to docker log collector
 RUN mkdir -p /app/logs/ && mkdir -p /app/www/
@@ -39,11 +67,9 @@ RUN chown www -R /app && chown www -R /etc/nginx
 RUN ln -sf /dev/stdout /app/logs/access.log
 RUN ln -sf /dev/stderr /app/logs/error.log
 
-# Add Nginx and Consul Template service
+# Add Nginx
 ADD nginx.service /etc/service/nginx/run
-ADD consul-template.service /etc/service/consul-template/run
 RUN chmod 775  -R /etc/service/nginx/
-RUN chmod 775  -R /etc/service/consul-template/
 
 # Expose HTTP and HTTPS ports
 EXPOSE 8080 443
