@@ -9,9 +9,8 @@ ENV NGINX_VERSION=1.9.13 NGINX_HOME=/usr/share/nginx
 
 # Build Nginx from source and install consul template
 RUN \
-  build_pkgs="build-base linux-headers openssl-dev pcre-dev wget zlib-dev" && \
-  runtime_pkgs="ca-certificates openssl pcre zlib" && \
-  apk --update add ${build_pkgs} ${runtime_pkgs}
+  apk --update --no-cache add build-base linux-headers openssl-dev pcre-dev wget zlib-dev \
+    ca-certificates openssl pcre zlib
 
 RUN \
   cd /tmp && \
@@ -51,7 +50,6 @@ RUN \
         --sbin-path=/usr/sbin/nginx && \
     make && \
     make install && \
-    apk del ${build_pkgs} && \
     rm -rf /tmp/*
 
 # Forward request and error logs to docker log collector
