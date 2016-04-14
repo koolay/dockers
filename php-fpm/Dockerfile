@@ -4,7 +4,7 @@ MAINTAINER koolay
 RUN apt-get update
 RUN apt-get install -y php5-dev php5-fpm php5-cli php5-memcached \
     php5-mysql php5-pgsql php5-sqlite php5-gd php5-json php5-ldap \
-    php5-curl php5-intl php5-mcrypt php5-imagick php5-imap ca-certificates
+    php5-curl php5-intl php5-mcrypt php5-imagick php5-imap ca-certificates git
 
 RUN php5enmod mcrypt && php5enmod memcached
 
