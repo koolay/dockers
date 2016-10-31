@@ -4,7 +4,8 @@ server {
 	proxy_set_header Host $host;
 	proxy_set_header X-Real-IP $remote_addr;
     charset utf-8;
-
+    root /home/app/webapp;
+    index index.html index.htm index.php;
 	location / {
 		proxy_redirect  off;
 
