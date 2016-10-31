@@ -4,10 +4,11 @@ MAINTAINER koolay
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
 
-RUN apt-get update
-RUN apt-get install -y php5-dev php5-fpm php5-cli php5-memcached \
-    php5-mysql php5-pgsql php5-sqlite php5-gd php5-json php5-ldap \
-    php5-curl php5-intl php5-mcrypt php5-imagick php5-imap ca-certificates
+RUN add-apt-repository -y ppa:ondrej/php \
+    && apt-get update \
+    && apt-get install -y php5.6-dev php5.6-fpm php5.6-cli php5-memcached \
+       php5.6-mysql php5.6-gd php5.6-json php5.6-ldap \
+       php5.6-curl php5.6-intl php5.6-mcrypt php5.6-imagick php5.6-imap ca-certificates
 
 RUN php5enmod mcrypt && php5enmod memcached
 
