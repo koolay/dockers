@@ -26,7 +26,10 @@ RUN mkdir -p /etc/service/fpm
 COPY service.sh /etc/service/fpm/run
 COPY init.sh /etc/my_init.d/init.sh
 COPY ./prepare.sh /prepare.sh
-RUN chmod +x /prepare.sh && bash /prepare.sh
+RUN chmod +x /etc/service/fpm/run \
+    && chmod +x /etc/my_init.d/init.sh \
+    && chmod +x /prepare.sh \
+    && bash /prepare.sh
 ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
