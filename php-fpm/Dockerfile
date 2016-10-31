@@ -20,8 +20,8 @@ RUN apt-get update \
 #RUN php5enmod mcrypt && php5enmod memcached
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN curl -o /tmp/xdebug-2.3.3.tgz -fSL http://xdebug.org/files/xdebug-2.3.3.tgz \
-    && cd /tmp ** tar -zxvf xdebug-2.3.3.tgz && cd xdebug-2.3.3 \
+RUN cd /tmp && curl -o /tmp/xdebug-2.3.3.tgz -fSL http://xdebug.org/files/xdebug-2.3.3.tgz \
+    && tar -zxvf xdebug-2.3.3.tgz && cd xdebug-2.3.3 \
     && phpize && ./configure --enable-xdebug && make && make install
 
 RUN apt-get -y purge firefox php7* && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /wheels/*
