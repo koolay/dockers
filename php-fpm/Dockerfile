@@ -24,9 +24,10 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN apt-get -y purge firefox php7* && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /wheels/*
 RUN mkdir -p /etc/service/fpm
 COPY run.sh /etc/service/fpm/run
-#RUN sed 's/;daemonize = yes/daemonize = no/' -i /etc/php5/fpm/php-fpm.conf
+RUN sed 's/;daemonize = yes/daemonize = no/' -i /etc/php/5.6/fpm/php-fpm.conf
 COPY init.sh /etc/my_init.d/init.sh
-
+COPY ./prepare.sh /prepare.sh
+RUN /prepare.sh
 ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
