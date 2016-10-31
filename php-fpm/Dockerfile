@@ -27,7 +27,7 @@ COPY run.sh /etc/service/fpm/run
 RUN sed 's/;daemonize = yes/daemonize = no/' -i /etc/php/5.6/fpm/php-fpm.conf
 COPY init.sh /etc/my_init.d/init.sh
 COPY ./prepare.sh /prepare.sh
-RUN /prepare.sh
+RUN chmod +x /prepare.sh && bash /prepare.sh
 ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
