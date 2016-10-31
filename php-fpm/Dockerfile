@@ -24,7 +24,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN apt-get -y purge firefox php7* && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /wheels/*
 RUN mkdir -p /etc/service/fpm
 COPY run.sh /etc/service/fpm/run
-RUN sed 's/;daemonize = yes/daemonize = no/' -i /etc/php/5.6/fpm/php-fpm.conf
 COPY init.sh /etc/my_init.d/init.sh
 COPY ./prepare.sh /prepare.sh
 RUN chmod +x /prepare.sh && bash /prepare.sh
